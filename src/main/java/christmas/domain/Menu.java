@@ -27,6 +27,10 @@ public class Menu {
         return name;
     }
 
+    public int getPrice() {
+        return price;
+    }
+
     private void validate(MenuType menuType, String name, int price) {
         if (menuType == null) {
             throw new IllegalArgumentException(ErrorMessage.FILE_LOAD_ERROR.getMessage());
