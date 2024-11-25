@@ -12,11 +12,7 @@ public class ChristmasDDay {
     }
 
     public int getDDayDiscount(int date) {
-        if (isInRange(date)) {
-            int difference = date - START_DATE;
-            return START_DISCOUNT + difference * ADD_DISCOUNT;
-        }
-
-        return 0;
+        int difference = date - START_DATE;
+        return START_DISCOUNT + difference * ADD_DISCOUNT;
     }
 }
