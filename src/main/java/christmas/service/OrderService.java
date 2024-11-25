@@ -4,6 +4,7 @@ import christmas.domain.Order;
 import christmas.exception.ErrorMessage;
 import christmas.repository.MenuRepository;
 import christmas.repository.OrderRepository;
+import christmas.util.NumberParser;
 import java.util.Arrays;
 import java.util.regex.Pattern;
 
@@ -43,14 +44,6 @@ public class OrderService {
             throw new IllegalArgumentException(ErrorMessage.INVALID_ORDER.getMessage());
         }
 
-        OrderRepository.addOrder(new Order(parts[NAME_INDEX], parseNumber(parts[QUANTITY_INDEX])));
-    }
-
-    private static int parseNumber(String input) {
-        try {
-            return Integer.parseInt(input);
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(ErrorMessage.INVALID_ORDER.getMessage());
-        }
+        OrderRepository.addOrder(new Order(parts[NAME_INDEX], NumberParser.parseNumber(parts[QUANTITY_INDEX])));
     }
 }

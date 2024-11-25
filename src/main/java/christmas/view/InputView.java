@@ -1,7 +1,7 @@
 package christmas.view;
 
 import camp.nextstep.edu.missionutils.Console;
-import christmas.exception.ErrorMessage;
+import christmas.util.NumberParser;
 import christmas.validation.InputValidator;
 
 public class InputView {
@@ -9,7 +9,7 @@ public class InputView {
     public static int askDate() {
         System.out.println("12월 중 식당 예상 방문 날짜는 언제인가요? (숫자만 입력해 주세요!)");
 
-        int date = parseNumber(Console.readLine());
+        int date = NumberParser.parseNumber(Console.readLine());
         InputValidator.validateDate(date);
 
         return date;
@@ -22,13 +22,5 @@ public class InputView {
         InputValidator.validateInput(order);
 
         return order;
-    }
-
-    private static int parseNumber(String input) {
-        try {
-            return Integer.parseInt(input);
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(ErrorMessage.INVALID_DATE.getMessage());
-        }
     }
 }
