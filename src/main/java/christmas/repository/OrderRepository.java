@@ -26,9 +26,14 @@ public class OrderRepository {
     }
 
     public static void validateOrders() {
-        if (isOnlyDrinks() || isOverLimit()) {
+        if (isOnlyDrinks()) {
             clearOrders();
-            throw new IllegalArgumentException(ErrorMessage.INVALID_ORDER.getMessage());
+            throw new IllegalArgumentException(ErrorMessage.NO_ONLY_DRINKS.getMessage());
+        }
+
+        if (isOverLimit()) {
+            clearOrders();
+            throw new IllegalArgumentException(ErrorMessage.QUANTITY_OVER_TWENTY.getMessage());
         }
     }
 
