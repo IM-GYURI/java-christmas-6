@@ -4,6 +4,7 @@ import christmas.domain.Order;
 import christmas.dto.PresentationDto;
 import christmas.dto.PreviewDto;
 import christmas.dto.PromotionDetailDto;
+import christmas.type.Badge;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,6 +30,9 @@ public class OutputView {
         printTotalPrice(preview.totalPrice());
         printPresentation(preview.presentation());
         printPromotionDetails(preview.promotionDetails());
+        printDiscountPrice(preview.discountPrice());
+        printResultPrice(preview.resultPrice());
+        printBadge(preview.badge());
     }
 
     private static void printOrders(List<Order> orders) {
@@ -72,5 +76,27 @@ public class OutputView {
         });
 
         System.out.println();
+    }
+
+    private static void printDiscountPrice(int discountPrice) {
+        System.out.println("<총혜택 금액>");
+        if (discountPrice == 0) {
+            System.out.println("0원" + System.lineSeparator());
+            return;
+        }
+
+        System.out.printf("-%,d" + System.lineSeparator() + System.lineSeparator()
+                , discountPrice);
+    }
+
+    private static void printResultPrice(int resultPrice) {
+        System.out.println("<할인 후 예상 결제 금액>");
+        System.out.printf("%,d원" + System.lineSeparator() + System.lineSeparator()
+                , resultPrice);
+    }
+
+    private static void printBadge(Badge badge) {
+        System.out.println("<12월 이벤트 배지>");
+        System.out.println(badge.getName());
     }
 }
