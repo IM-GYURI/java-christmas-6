@@ -1,6 +1,6 @@
 package christmas.domain;
 
-public class ChristmasDDay {
+public class DDayPromotion {
 
     private static final int START_DISCOUNT = 1_000;
     private static final int ADD_DISCOUNT = 100;
