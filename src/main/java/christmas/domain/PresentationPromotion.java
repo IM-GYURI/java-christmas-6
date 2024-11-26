@@ -3,7 +3,7 @@ package christmas.domain;
 import christmas.dto.PresentationDto;
 import christmas.repository.MenuRepository;
 
-public class Presentation {
+public class PresentationPromotion {
 
     private static final int PRICE_THRESHOLD = 120_000;
     private static final Menu PRESENT_MENU = MenuRepository.findByName("샴페인");
