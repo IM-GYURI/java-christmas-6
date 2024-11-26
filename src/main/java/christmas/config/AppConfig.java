@@ -1,25 +1,42 @@
 package christmas.config;
 
 import christmas.controller.ChristmasController;
-import christmas.domain.ChristmasDDay;
-import christmas.domain.Presentation;
-import christmas.service.OrderService;
+import christmas.domain.DDayPromotion;
+import christmas.domain.PresentationPromotion;
+import christmas.domain.SpecialPromotion;
+import christmas.domain.WeekdayPromotion;
+import christmas.domain.WeekendPromotion;
+import christmas.service.MenuInitializer;
 import christmas.service.PriceService;
 import christmas.service.PromotionService;
+import christmas.util.InputParser;
+import christmas.util.RetryHandler;
+import christmas.validation.InputValidator;
 
-public enum AppConfig {
-
-    INSTANCE;
-
-    private final Presentation presentation = new Presentation();
-    private final ChristmasDDay christmasDDay = new ChristmasDDay();
-    private final OrderService orderService = new OrderService();
-    private final PriceService priceService = new PriceService();
-    private final PromotionService promotionService = new PromotionService(presentation, christmasDDay);
-    private final ChristmasController christmasController = new ChristmasController(
-            orderService, priceService, promotionService);
+public class AppConfig {
 
     public ChristmasController getChristmasController() {
-        return christmasController;
+        MenuInitializer.initMenuSetting();
+
+        RetryHandler retryHandler = getRetryHandler();
+        PriceService priceService = new PriceService();
+        PromotionService promotionService = getPromotionService();
+
+        return new ChristmasController(retryHandler, priceService, promotionService);
+    }
+
+    private RetryHandler getRetryHandler() {
+        return new RetryHandler(new InputParser(), new InputValidator());
+    }
+
+    private PromotionService getPromotionService() {
+        PresentationPromotion presentationPromotion = new PresentationPromotion();
+        DDayPromotion DDayPromotion = new DDayPromotion();
+        WeekdayPromotion weekdayPromotion = new WeekdayPromotion();
+        WeekendPromotion weekendPromotion = new WeekendPromotion();
+        SpecialPromotion specialPromotion = new SpecialPromotion();
+
+        return new PromotionService(presentationPromotion, DDayPromotion, weekdayPromotion, weekendPromotion,
+                specialPromotion);
     }
 }
