@@ -9,10 +9,6 @@ public class MenuRepository {
 
     private static final List<Menu> menus = new ArrayList<>();
 
-    public static List<Menu> menus() {
-        return menus.stream().toList();
-    }
-
     public static void addMenu(Menu menu) {
         menus.add(menu);
     }
